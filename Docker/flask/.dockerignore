@@ -1,0 +1,7 @@
+# Lié à l'IDE utilisé
+__pycache__/
+app/__pycache__/
+.idea/
+
+# Le dockerignore lui-même
+.dockerignore

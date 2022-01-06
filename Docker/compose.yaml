@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  # Aplication web
+  flask:
+    image: ccmm99/info910_flask
+    build:             
+      context: flask
+      dockerfile: Dockerfile
+    # On nomme le container
+    container_name: info910_flask
+    # On ajoute une variable d'environnement nécessaire au fonctionnement de l'application
+    environment:
+      - APP_NAME=ChatsHTTP
+    # On expose le port 8080, sans le rendre accessible à l'extérieur des services
+    expose:
+      - 8080
+      
+  # Server web
+  nginx:
+    image: ccmm99/info910_nginx
+    build:             
+      context: nginx
+      dockerfile: Dockerfile
+    container_name: info910_nginx
+    # On expose le port 80, de façon à ce qu'il soit acessible depuis l'extérieur
+    ports:
+      - "80:80"

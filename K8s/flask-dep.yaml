@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask
+  labels:
+    app: chatshttp
+    role: front
+spec:
+  selector:
+    matchLabels:
+      app: flask
+      role: front
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: flask
+        role: front
+    spec:
+      containers:
+      - name: flask
+        image: ccmm99/info910_flask # On précise l'image à récupérer
+        resources: # On précise les ressources que l'on alloue
+          limits:
+            memory: "350Mi"
+            cpu: "500m"
+          requests:
+            memory: "200Mi"
+            cpu: "0.3"
+        ports:
+        - containerPort: 8080 # Le deployment doit être accessible sur le port 8080
+        env: # On précise les variables d'environnement nécessaire au fonctionnement du deployment
+        - name: APP_NAME
+          value: ChatsHTTP
